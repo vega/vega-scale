@@ -1,3 +1,4 @@
+import bandSpace from './bandSpace';
 import {range as sequence, bisectRight} from 'd3-array';
 import {scaleOrdinal as ordinal} from 'd3-scale';
 
@@ -19,8 +20,9 @@ export default function band() {
     var n = domain().length,
         reverse = range[1] < range[0],
         start = range[reverse - 0],
-        stop = range[1 - reverse];
-    step = (stop - start) / Math.max(1, n - paddingInner + paddingOuter * 2);
+        stop = range[1 - reverse],
+        space = bandSpace(n, paddingInner, paddingOuter);
+    step = (stop - start) / (space || 1);
     if (round) step = Math.floor(step);
     start += (stop - start - step * (n - paddingInner)) * align;
     bandwidth = step * (1 - paddingInner);
