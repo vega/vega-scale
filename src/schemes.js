@@ -82,9 +82,14 @@ add('yellowgreen',       'YlGn');
 add('yelloworangebrown', 'YlOrBr');
 add('yelloworangered',   'YlOrRd');
 
-export default function(name, scheme) {
+export default function(name, scheme, discreteScheme) {
   if (arguments.length > 1) {
     schemes[name] = scheme;
+
+    if (discreteScheme) {
+      discrete[name] = discreteScheme;
+    }
+
     return this;
   }
 
